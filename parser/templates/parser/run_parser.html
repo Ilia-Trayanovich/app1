@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">
+{% endblock css %}
+
+{% block content %}
+    <html lang="ru">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Запуск парсера</title>
+        </head>
+        <body>
+            <h1>Запуск парсера</h1>
+        
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li class="alert {% if message.level == 50 %}alert-success{% else %}alert-danger{% endif %}">
+                            {{ message }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit">Запустить парсер</button>
+            </form>
+        </body>
+        </html>
+{% endblock content %}
+
+{% block footer %}
+<footer class="py-4 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Home</p>
+    </div>
+</footer>
+{% endblock footer %}
+
+
+
