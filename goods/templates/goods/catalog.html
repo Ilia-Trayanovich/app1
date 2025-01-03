@@ -1,7 +1,6 @@
 {% extends "main/base.html" %}
 {% load static %}
 
-
 {% block content %}
 <div class="row">
     <!-- Форма фильтров -->
@@ -58,16 +57,22 @@
     </div>
 
     {% for apartment in apartments %}
-    <div class="col-lg-4 col-md-6 p-4">
+    <div class="col-12 p-4">
         <div class="card border-primary rounded custom-shadow">
             <div class="card-body">
                 <a href="{{ apartment.link }}">
                     <p class="card-title">{{ apartment.place }}</p>
                 </a>
-                <p class="card-text text-truncate">
-                    {{ apartment.rooms }} комнаты, {{ apartment.apartment_size }} м², Этаж: {{ apartment.floor }}
-                </p>
-                <p><strong>{{ apartment.price }} $</strong></p>
+                <div class="d-flex justify-content-between">
+                    <p class="card-text text-truncate">
+                        {{ apartment.rooms }} комнаты, {{ apartment.apartment_size }} м², Этаж: {{ apartment.floor }}
+                    </p>
+                    <!-- Контейнер для цены и кнопки "Анализ" -->
+                    <div class="d-flex align-items-center">
+                        <p><strong>{{ apartment.price }} $</strong></p>
+                        <a href="{% url 'analysis:index' apartment.flat_id %}" class="btn btn-secondary ml-2">Анализ</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -77,22 +82,27 @@
 <!-- Пагинация -->
 <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center my-4">
+        {% if page != 1 %}
         <li class="page-item">
-            <a class="page-link" href="?page=1">1</a>
+            <a class="page-link" href="?page=1{% if request.GET.rooms %}&rooms={{ request.GET.rooms }}{% endif %}{% if request.GET.min_size %}&min_size={{ request.GET.min_size }}{% endif %}{% if request.GET.max_size %}&max_size={{ request.GET.max_size }}{% endif %}{% if request.GET.order_by %}&order_by={{ request.GET.order_by }}{% endif %}">1</a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="?page=2">2</a>
+            <a class="page-link" href="?page={{ page|add:-1 }}{% if request.GET.rooms %}&rooms={{ request.GET.rooms }}{% endif %}{% if request.GET.min_size %}&min_size={{ request.GET.min_size }}{% endif %}{% if request.GET.max_size %}&max_size={{ request.GET.max_size }}{% endif %}{% if request.GET.order_by %}&order_by={{ request.GET.order_by }}{% endif %}">{{ page|add:-1 }}</a>
+        </li>
+        {% endif %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page }}{% if request.GET.rooms %}&rooms={{ request.GET.rooms }}{% endif %}{% if request.GET.min_size %}&min_size={{ request.GET.min_size }}{% endif %}{% if request.GET.max_size %}&max_size={{ request.GET.max_size }}{% endif %}{% if request.GET.order_by %}&order_by={{ request.GET.order_by }}{% endif %}">{{ page }} </a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="?page=3">3</a>
+            <a class="page-link" href="?page={{ page|add:1 }}{% if request.GET.rooms %}&rooms={{ request.GET.rooms }}{% endif %}{% if request.GET.min_size %}&min_size={{ request.GET.min_size }}{% endif %}{% if request.GET.max_size %}&max_size={{ request.GET.max_size }}{% endif %}{% if request.GET.order_by %}&order_by={{ request.GET.order_by }}{% endif %}">{{ page|add:1 }}</a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="?page=next">Next</a>
+            <a class="page-link" href="?page={{ next_page }}{% if request.GET.rooms %}&rooms={{ request.GET.rooms }}{% endif %}{% if request.GET.min_size %}&min_size={{ request.GET.min_size }}{% endif %}{% if request.GET.max_size %}&max_size={{ request.GET.max_size }}{% endif %}{% if request.GET.order_by %}&order_by={{ request.GET.order_by }}{% endif %}">Далее</a>
         </li>
     </ul>
 </nav>
-{% endblock %}
 
+{% endblock %}
 
 {% block footer %}
 <footer class="py-4 bg-dark">

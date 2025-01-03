@@ -1,0 +1,55 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'deps/css/my_footer_css.css' %}">
+    <style>
+        .graph-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Расстояние между графиками */
+            justify-content: center;
+        }
+
+        .graph-container .col-md-6 {
+            flex: 0 0 48%; /* Каждый элемент занимает 48% от ширины */
+            max-width: 48%;
+        }
+
+        .graph-container img {
+            width: 100%; /* Ширина изображения всегда 100% от контейнера */
+            height: auto; /* Сохраняем пропорции */
+            max-height: 400px; /* Максимальная высота изображения, чтобы оно не растягивалось слишком сильно */
+        }
+
+        h3 {
+            font-size: 16px; /* Уменьшаем шрифт заголовков */
+        }
+
+        .content-wrapper {
+            margin-bottom: 50px; /* Отступ снизу, чтобы футер не залезал на контент */
+        }
+    </style>
+{% endblock css %}
+
+{% block content %}
+<div class="container mt-5 pt-5 text-center content-wrapper">
+    <h1><strong>{{ content }}</strong></h1>
+    <div class="graph-container">
+        {% for graph in graphs %}
+        <div class="col-md-6 mb-4">
+            <h3>{{ graph.title }}</h3>
+            <img src="{{ graph.image }}" alt="{{ graph.title }}" class="img-fluid">
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
+
+{% block footer %}
+<footer class="py-4 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Home</p>
+    </div>
+</footer>
+{% endblock footer %}

@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'goods',
     'parser',
     'django_celery_results',
+    'analytics',
+    'analysis',
     
 ]
 

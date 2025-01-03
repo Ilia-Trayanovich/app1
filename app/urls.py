@@ -25,4 +25,6 @@ urlpatterns = [
     path('', include('main.urls', namespace='main')),
     path('catalog/', include('goods.urls', namespace='catalog')),
     path('parser/', include('parser.urls', namespace='parser')),
+    path('analytics/', include('analytics.urls', namespace='analytics')),
+    path('analysis/', include('analysis.urls', namespace='analysis')),
 ]
