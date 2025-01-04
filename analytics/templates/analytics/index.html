@@ -11,15 +11,16 @@
             justify-content: center;
         }
 
-        .graph-container .col-md-6 {
+        .graph-container .graph-item {
             flex: 0 0 48%; /* Каждый элемент занимает 48% от ширины */
             max-width: 48%;
+            margin-bottom: 20px; /* Отступ снизу для каждого элемента */
         }
 
         .graph-container img {
             width: 100%; /* Ширина изображения всегда 100% от контейнера */
             height: auto; /* Сохраняем пропорции */
-            max-height: 400px; /* Максимальная высота изображения, чтобы оно не растягивалось слишком сильно */
+            max-height: 400px; /* Максимальная высота изображения */
         }
 
         h3 {
@@ -35,11 +36,11 @@
 {% block content %}
 <div class="container mt-5 pt-5 text-center content-wrapper">
     <h1><strong>{{ content }}</strong></h1>
-    <div class="graph-container">
+    <div class="row graph-container">
         {% for graph in graphs %}
-        <div class="col-md-6 mb-4">
-            <h3>{{ graph.title }}</h3>
-            <img src="{{ graph.image }}" alt="{{ graph.title }}" class="img-fluid">
+        <div class="col-md-6 graph-item">
+            <h2>{{ graph.title }}</h2>
+            <img src="{{ graph.image }}" alt="{{ graph.title }}">
         </div>
         {% endfor %}
     </div>
