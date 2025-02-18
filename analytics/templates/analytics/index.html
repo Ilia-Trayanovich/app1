@@ -40,7 +40,7 @@
         {% for graph in graphs %}
         <div class="col-md-6 graph-item">
             <h2>{{ graph.title }}</h2>
-            <img src="{{ graph.image }}" alt="{{ graph.title }}">
+            <img src="/static/analytics/graphs/{{ graph.image }}" alt="{{ graph.title }}">
         </div>
         {% endfor %}
     </div>
