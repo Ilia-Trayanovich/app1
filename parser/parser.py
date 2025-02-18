@@ -129,8 +129,9 @@ def run_parsing():
 
             print(f"Парсинг страницы {page_count} завершен")
             page_count += 1
-
+            # if page_count == 3:
+            #     break
         session.commit()
 
     session.close()
-# run_parsing()
+#run_parsing()
